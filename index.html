@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions CI/CD</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>GitHub Pages Deployment</h1>
+    <p>This page serves as the result display of the CI/CD process using GitHub Actions.</p>
+    <h2>Execution Output</h2>
+    <pre id="resultOutput">Loading...</pre>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            fetch('result.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Failed to load result.json');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('resultOutput').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    document.getElementById('resultOutput').innerText = 'Error loading result.json: ' + error;
+                });
+        });
+    </script>
+</body>
+</html>
